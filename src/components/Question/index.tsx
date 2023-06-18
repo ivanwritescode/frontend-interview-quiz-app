@@ -1,3 +1,5 @@
+import { ChangeEvent, useState } from "react";
+
 interface IQuestionProps {
   question: IQuestion
   onNextClicked: () => void
@@ -5,6 +7,17 @@ interface IQuestionProps {
 }
 
 const Question = ({ question, onNextClicked, onPrevClicked }: IQuestionProps) => {
+  const [selectedOption, setSelectedOption] = useState('');
+
+  const handleOptionChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setSelectedOption(event.target.value);
+  }
+
+  const getAnswerItemClass = (isChecked: boolean) => {
+    let className = "answer-item";
+    return isChecked ? `${className} checked` : className;
+  };
+
   return (
     <section className="question-section">
       <div className="question">
@@ -13,8 +26,14 @@ const Question = ({ question, onNextClicked, onPrevClicked }: IQuestionProps) =>
       </div>
       <div className="answer">
         {question.options.map((option, i) =>
-          <label key={i} className="answer-item">
-            <input type="radio" name={`option${i}`} onChange={() => { }} id={i.toString()} />
+          <label key={i} className={getAnswerItemClass(selectedOption === `option${i}`)}>
+            <input
+              type="radio"
+              name={`option${i}`}
+              value={`option${i}`}
+              checked={selectedOption === `option${i}`}
+              onChange={handleOptionChange}
+              id={i.toString()} />
             <span>{option}</span>
           </label>
         )}
