@@ -26,7 +26,7 @@ function App() {
       <div className="container">
         <QuizTitle title='React Interview Questions' />
         <Question question={interviewquestions[questionId]} onNextClicked={onNextClicked} onPrevClicked={onPrevClicked} />
-        <Explanation text={interviewquestions[questionId].explanation} />
+        <Explanation explanationText={interviewquestions[questionId].explanation} />
         <QuestionsNavigation currentQuestionNumber={questionId + 1} numberOfQuestions={interviewquestions.length} />
       </div>
     </main>

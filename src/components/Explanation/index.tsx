@@ -1,12 +1,12 @@
 interface IExplanationProps {
-  text: string
+  explanationText: string
 }
 
-const Explanation = ({ text }: IExplanationProps) => {
+const Explanation = ({ explanationText }: IExplanationProps) => {
   return (
     <section className="explanation-section">
       <h2 className="section-title">Explanation</h2>
-      <p className="explanation-text">{text}</p>
+      <p className="explanation-text">{explanationText}</p>
     </section>
   )
 }
