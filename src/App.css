@@ -61,7 +61,7 @@ body {
 }
 
 .answer-item {
-  padding: 1rem 0;
+  padding: 1rem 2rem;
   display:block;
   box-shadow: 0 7px 7px rgba(0, 0, 0, 0.1);
   border-radius: 0.5rem;
@@ -89,10 +89,6 @@ body {
 .answer-item.wrong:active {
   background: #da4955;
   color: #fff;
-}
-
-.answer-item span {
-  margin-left: 2rem;
 }
 
 .answer-item:hover,
@@ -246,6 +242,10 @@ body {
     left: 0%;
     transform: translate(0%, 0%);  
    }
+
+  .answer-item {
+    text-align: center;
+  }
 } 
 
 @media (max-width: 38rem) {
