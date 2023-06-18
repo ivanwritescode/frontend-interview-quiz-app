@@ -4,10 +4,10 @@ export const interviewquestions = [
         type: "multipleChoice",
         question: "What is JSX in React?",
         options: [
-            "JavaScript XML",
             "Java Syntax Extension",
             "JavaScript Extension",
-            "JSX is not related to React"
+            "JSX is not related to React",
+            "JavaScript XML"
         ],
         correctAnswer: "JavaScript XML",
         explanation: "JSX stands for JavaScript XML. It is an extension to JavaScript syntax that allows you to write HTML-like code within your JavaScript code. JSX is primarily used in React, a popular JavaScript library for building user interfaces. With JSX, you can write components in a more declarative and intuitive way, combining JavaScript logic and HTML structure together. JSX code is transpiled into regular JavaScript code that can be understood and executed by browsers. It provides a convenient and efficient way to build dynamic and interactive UI components in React."
@@ -17,12 +17,12 @@ export const interviewquestions = [
         "type": "multipleChoice",
         "question": "What is React?",
         "options": [
-            "A JavaScript framework for building user interfaces",
             "A database management system",
+            "A JavaScript framework for building user interfaces",
             "A programming language",
             "A version control system"
         ],
-        "correctAnswer": "a) A JavaScript framework for building user interfaces",
+        "correctAnswer": "A JavaScript framework for building user interfaces",
         "explanation": "React is a JavaScript library used for building user interfaces in web applications. It allows developers to create reusable UI components and efficiently update and render them based on data changes."
     },
     {
@@ -43,9 +43,9 @@ export const interviewquestions = [
         "type": "multipleChoice",
         "question": "What are React hooks?",
         "options": [
-            "Tools for managing state and side effects in functional components",
             "Special CSS classes used in React for styling",
             "Functions that enable routing in React applications",
+            "Tools for managing state and side effects in functional components",
             "Libraries for handling form validation in React"
         ],
         "correctAnswer": "Tools for managing state and side effects in functional components",
@@ -56,10 +56,10 @@ export const interviewquestions = [
         "type": "multipleChoice",
         "question": "What is the purpose of the useState hook in React?",
         "options": [
-            "To manage and update component state",
             "To fetch data from an API",
             "To handle user input in forms",
-            "To control component lifecycle events"
+            "To control component lifecycle events",
+            "To manage and update component state"
         ],
         "correctAnswer": "To manage and update component state",
         "explanation": "The useState hook in React is used to add state to functional components. It allows you to declare and update state variables within a functional component, enabling the component to react to changes and re-render as necessary."
@@ -69,8 +69,8 @@ export const interviewquestions = [
         "type": "multipleChoice",
         "question": "What is JSX in React?",
         "options": [
-            "JavaScript XML",
             "Java Syntax Extension",
+            "JavaScript XML",
             "JavaScript Extension",
             "JSX is not related to React"
         ],
@@ -82,10 +82,10 @@ export const interviewquestions = [
         "type": "multipleChoice",
         "question": "What is the purpose of the useEffect hook in React?",
         "options": [
-            "To handle side effects and perform cleanup in functional components",
             "To create reusable custom hooks",
             "To implement routing in React applications",
-            "To handle form validation in React applications"
+            "To handle form validation in React applications",
+            "To handle side effects and perform cleanup in functional components"
         ],
         "correctAnswer": "To handle side effects and perform cleanup in functional components",
         "explanation": "The useEffect hook in React is used to handle side effects in functional components. Side effects may include data fetching, subscriptions, or manually changing the DOM. It allows you to perform certain actions after React has rendered and updated the DOM. Additionally, the useEffect hook can also be used to clean up resources and perform actions before the component is unmounted or updated."

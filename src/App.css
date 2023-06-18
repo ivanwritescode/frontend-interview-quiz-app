@@ -5,7 +5,7 @@
 }
 
 body {
-  background: #3586ff;
+  background: #001b27;
   font-family: 'Font1', sans-serif;
 }
 
@@ -69,12 +69,24 @@ body {
   cursor: pointer;
 }
 
-.answer-item.checked {
-  background: #aabdff;
+.answer-item.correct {
+  background: #20c457;
+  color: #fff;
+}
+
+.answer-item.correct:hover,
+.answer-item.correct:active {
+  background: #20c457;
   color: #fff;
 }
 
 .answer-item.wrong {
+  background: #da4955;
+  color: #fff;
+}
+
+.answer-item.wrong:hover,
+.answer-item.wrong:active {
   background: #da4955;
   color: #fff;
 }
