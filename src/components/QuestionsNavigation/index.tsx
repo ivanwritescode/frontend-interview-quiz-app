@@ -12,7 +12,7 @@ const generateNavControlItems = (currentPosition: number, maxValue: number) => {
         else if (i === currentPosition)
             className = "active"
 
-        jsxElements.push(<li key={`navlistitem-${i}`}><a className={className} href="#">{i}</a></li>);
+        jsxElements.push(<li key={`navcontrolitem-${i}`}><a className={className} href="#">{i}</a></li>);
     }
     return jsxElements;
 };
