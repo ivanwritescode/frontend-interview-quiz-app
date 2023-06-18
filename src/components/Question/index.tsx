@@ -8,7 +8,7 @@ const Question = ({ question, onNextClicked, onPrevClicked }: IQuestionProps) =>
   return (
     <section className="question-section">
       <div className="question">
-        <h2 className="question-num">Question {question.id}</h2>
+        <h2 className="question-num">Question {question.id + 1}</h2>
         <p className="question-text">{question.question}</p>
       </div>
       <div className="answer">

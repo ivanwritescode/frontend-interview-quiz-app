@@ -10,10 +10,14 @@ function App() {
   const [questionId, setQuestionId] = useState(0);
 
   const onNextClicked = () => {
+    if (questionId + 1 > interviewquestions.length - 1)
+      return;
     setQuestionId((questionId: number) => questionId + 1)
   };
 
   const onPrevClicked = () => {
+    if (questionId - 1 < 0)
+      return;
     setQuestionId((questionId: number) => questionId - 1)
   };
 
