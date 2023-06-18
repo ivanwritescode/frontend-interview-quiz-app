@@ -1,4 +1,4 @@
-[Live Demo](https://ivanwritescode.github.io/results-summary-component/)
+[Live Demo](https://ivanwritescode.github.io/frontend-interview-quiz-app/)
 ## Installation
 
 Follow these steps to install and run the project locally:
