@@ -3,7 +3,7 @@ interface iQuestionsNavigationProps {
     numberOfQuestions: number;
 }
 
-const generateListItems = (currentPosition:number, maxValue: number) => {
+const generateNavControlItems = (currentPosition:number, maxValue: number) => {
     const jsxElements = [];
     for (let i = 1; i <= maxValue; i++) {
         let className = "";
@@ -27,7 +27,7 @@ const QuestionsNavigation = ({ currentQuestionNumber, numberOfQuestions }: iQues
             </p>
             <div className="d-flex">
                 <ul className="question-nums-list">
-                    { generateListItems(currentQuestionNumber, numberOfQuestions) }
+                    { generateNavControlItems (currentQuestionNumber, numberOfQuestions) }
                 </ul>
             </div>
         </section>
