@@ -10,11 +10,11 @@ function App() {
   const [questionId, setQuestionId] = useState(0);
 
   const onNextClicked = () => {
-    setQuestionId((questionId: number) => questionId+1)
+    setQuestionId((questionId: number) => questionId + 1)
   };
 
   const onPrevClicked = () => {
-    setQuestionId((questionId: number) => questionId-1)
+    setQuestionId((questionId: number) => questionId - 1)
   };
 
   return (
