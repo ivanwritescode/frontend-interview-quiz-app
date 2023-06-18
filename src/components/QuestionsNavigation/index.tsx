@@ -3,6 +3,7 @@ interface iQuestionsNavigationProps {
     numberOfQuestions: number;
 }
 
+// TODO: add a skip functionality
 const generateNavControlItems = (currentPosition: number, maxValue: number) => {
     const jsxElements = [];
     for (let i = 1; i <= maxValue; i++) {
