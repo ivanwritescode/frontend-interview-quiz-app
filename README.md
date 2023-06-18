@@ -1,4 +1,4 @@
-Live Site URL: [Live Site](https://ivanwritescode.github.io/results-summary-component/)
+[Live Demo](https://ivanwritescode.github.io/results-summary-component/)
 ## Installation
 
 Follow these steps to install and run the project locally:
