@@ -3,6 +3,6 @@ interface IQuizTitleProps {
 }
 
 const QuizTitle = ({ title }: IQuizTitleProps) =>
-    <h1 className="quiz-title">{title}</h1>
+    <h1 className="quiz-title">{ title }</h1>
 
 export default QuizTitle;
