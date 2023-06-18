@@ -3,11 +3,11 @@ interface iQuestionsNavigationProps {
     numberOfQuestions: number;
 }
 
-const generateNavControlItems = (currentPosition:number, maxValue: number) => {
+const generateNavControlItems = (currentPosition: number, maxValue: number) => {
     const jsxElements = [];
     for (let i = 1; i <= maxValue; i++) {
         let className = "";
-        if(i < currentPosition)
+        if (i < currentPosition)
             className = "done"
         else if (i === currentPosition)
             className = "active"
@@ -16,7 +16,6 @@ const generateNavControlItems = (currentPosition:number, maxValue: number) => {
     }
     return jsxElements;
 };
-
 
 const QuestionsNavigation = ({ currentQuestionNumber, numberOfQuestions }: iQuestionsNavigationProps) => {
     return (
@@ -27,7 +26,7 @@ const QuestionsNavigation = ({ currentQuestionNumber, numberOfQuestions }: iQues
             </p>
             <div className="d-flex">
                 <ul className="question-nums-list">
-                    { generateNavControlItems (currentQuestionNumber, numberOfQuestions) }
+                    {generateNavControlItems(currentQuestionNumber, numberOfQuestions)}
                 </ul>
             </div>
         </section>
