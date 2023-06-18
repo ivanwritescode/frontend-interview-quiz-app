@@ -1,4 +1,8 @@
-const QuizTitle = () =>
-    <h1 className="quiz-title">Quiz Title</h1>
+interface IQuizTitleProps {
+    title: string
+}
+
+const QuizTitle = ({ title }: IQuizTitleProps) =>
+    <h1 className="quiz-title">{title}</h1>
 
 export default QuizTitle;

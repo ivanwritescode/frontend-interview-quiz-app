@@ -8,7 +8,7 @@ function App() {
   return (
     <main>
       <div className="container">
-        <QuizTitle />
+        <QuizTitle title='React Interview Questions' />
         <Question />
         <Explanation />
         <QuestionsNavigation />
