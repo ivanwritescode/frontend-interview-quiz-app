@@ -8,8 +8,24 @@ import { interviewquestions } from './util/questions'
 
 function App() {
   const [questionId, setQuestionId] = useState(0);
+  const [selectedAnswer, setSelectedAnswer] = useState('');
   const [score, setScore] = useState(0);
 
+  // for debugging
+  const log = () => {
+    const currentQuestion = interviewquestions[questionId];
+    console.table({
+      "Selected Option": selectedAnswer,
+      "Correct Answer": currentQuestion.correctAnswer,
+      "Is Correct":  getIsAnswerCorrect()
+    });
+  };
+
+  const getIsAnswerCorrect = () => {
+    const currentQuestion = interviewquestions[questionId];
+    return currentQuestion.correctAnswer === selectedAnswer;
+  };
+  
   const onNextClicked = () => {
     if (questionId + 1 > interviewquestions.length - 1)
       return;
@@ -22,14 +38,23 @@ function App() {
     setQuestionId((questionId: number) => questionId - 1)
   };
 
-  const onAnswerSelected = (isCorrect: boolean) => {
-    if (isCorrect)
-      setScore((prevScore) => prevScore + 1)
+  const onAnswerSelected = (value: string) => {
+    setSelectedAnswer(value);
   };
 
   useEffect(() => {
-    console.log("SCORE: ", score);
+    if (getIsAnswerCorrect())
+      setScore((prevScore) => prevScore + 1);
+    log(); // log answer information everytime selected answer is updated
+  }, [selectedAnswer]);
+
+  useEffect(() => {
+    console.log("SCORE: ", score); // log score everytime it changes
   }, [score]);
+  
+  useEffect(() => {
+    setSelectedAnswer(''); // clear selected everytime the question changes
+  }, [questionId])
 
   return (
     <main>
@@ -37,6 +62,7 @@ function App() {
         <QuizTitle title='React Interview Questions' />
         <Question
           question={interviewquestions[questionId]}
+          selectedAnswer={selectedAnswer}
           onNextClicked={onNextClicked}
           onPrevClicked={onPrevClicked}
           onAnswerSelected={onAnswerSelected} />

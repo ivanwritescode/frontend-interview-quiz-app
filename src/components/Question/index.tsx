@@ -1,35 +1,27 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import Option from "./Option";
 
 interface IQuestionProps {
   question: IQuestion
+  selectedAnswer: string;
   onNextClicked: () => void
   onPrevClicked: () => void
-  onAnswerSelected: (isCorrect: boolean) => void
+  onAnswerSelected: (answerValue: string) => void
 }
 
-const Question = ({ question, onNextClicked, onPrevClicked, onAnswerSelected }: IQuestionProps) => {
-  const [selectedOption, setSelectedOption] = useState('');
-
+const Question = ({ question, selectedAnswer, onNextClicked, onPrevClicked, onAnswerSelected }: IQuestionProps) => {
   const getIsCorrect = (optionValue: string) => {
     return question.correctAnswer === optionValue;
   };
 
   const getIsSelected = (optionValue: string) => {
-    return optionValue === selectedOption;
+    return optionValue === selectedAnswer;
   };
 
-  const handleOptionChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const optionValue = event.target.value;
-    setSelectedOption(optionValue);
-  }
-
   const handleNextClicked = () => {
-    setSelectedOption('');
     onNextClicked();
   }
 
   const handlePrevClicked = () => {
-    setSelectedOption('');
     onPrevClicked();
   }
 
@@ -44,17 +36,6 @@ const Question = ({ question, onNextClicked, onPrevClicked, onAnswerSelected }: 
     return className;
   };
 
-  useEffect(() => {
-    onAnswerSelected(getIsCorrect(selectedOption));
-
-    // for debugging
-    console.table({
-      "Selected Option": selectedOption,
-      "Correct Answer": question.correctAnswer,
-      "Is Correct": getIsCorrect(selectedOption)
-    })
-  }, [selectedOption]);
-
   return (
     <section className="question-section">
       <div className="question">
@@ -63,16 +44,13 @@ const Question = ({ question, onNextClicked, onPrevClicked, onAnswerSelected }: 
       </div>
       <div className="answer">
         {question.options.map((option, i) =>
-          <label key={i} className={getAnswerItemClass(option)}>
-            <input
-              type="radio"
-              name={`option${i}`}
-              value={option}
-              checked={getIsSelected(option)}
-              onChange={handleOptionChange}
-              id={i.toString()} />
-            <span>{option}</span>
-          </label>
+          <Option
+            key={i}
+            id={i.toString()}
+            className={getAnswerItemClass(option)}
+            value={option}
+            isSelected={getIsSelected(option)}
+            onChange={onAnswerSelected} />
         )}
       </div>
       <div className="action">
