@@ -1,10 +1,11 @@
 interface IExplanationProps {
-  explanationText: string
+  explanationText: string;
+  isShown: boolean;
 }
 
-const Explanation = ({ explanationText }: IExplanationProps) => {
+const Explanation = ({ explanationText, isShown }: IExplanationProps) => {
   return (
-    <section className="explanation-section">
+    <section className={`explanation-section ${isShown ? "" : "hidden"}`}>
       <h2 className="section-title">Explanation</h2>
       <p className="explanation-text">{explanationText}</p>
     </section>

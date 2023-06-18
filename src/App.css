@@ -153,6 +153,21 @@ body {
   margin-bottom: 1.5rem;
 }
 
+.explanation-section.hidden .explanation-text {
+  position: relative;
+  display: inline-block;
+}
+
+.explanation-section.hidden .explanation-text::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background-color: #f3f3f3;
+}
+
 .questions-nav-section {
   grid-area: questions-nav-section;
   padding: 1rem;

@@ -9,6 +9,7 @@ import { interviewquestions } from './util/questions'
 function App() {
   const [questionId, setQuestionId] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState('');
+  const [isExplanationShown, setIsExplanationShown] = useState(false);
   const [score, setScore] = useState(0);
 
   // for debugging
@@ -27,11 +28,15 @@ function App() {
   };
   
   const onNextClicked = () => {
-    setQuestionId((questionId: number) => questionId + 1)
+    setQuestionId((questionId: number) => questionId + 1);
+    setIsExplanationShown(false);
+    setSelectedAnswer('');
   };
 
   const onPrevClicked = () => {
-    setQuestionId((questionId: number) => questionId - 1)
+    setQuestionId((questionId: number) => questionId - 1);
+    setIsExplanationShown(false);
+    setSelectedAnswer('');
   };
 
   const onAnswerSelected = (value: string) => {
@@ -41,6 +46,7 @@ function App() {
   useEffect(() => {
     if (getIsAnswerCorrect())
       setScore((prevScore) => prevScore + 1);
+    setIsExplanationShown(true);
     log(); // log answer information everytime selected answer is updated
   }, [selectedAnswer]);
 
@@ -50,6 +56,7 @@ function App() {
   
   useEffect(() => {
     setSelectedAnswer(''); // clear selected everytime the question changes
+    setIsExplanationShown(false);
   }, [questionId])
 
   return (
@@ -64,7 +71,9 @@ function App() {
           onNextClicked={onNextClicked}
           onPrevClicked={onPrevClicked}
           onAnswerSelected={onAnswerSelected} />
-        <Explanation explanationText={interviewquestions[questionId].explanation} />
+        <Explanation
+          explanationText={interviewquestions[questionId].explanation}
+          isShown={isExplanationShown} />
         <QuestionsNavigation
           currentQuestionNumber={questionId + 1}
           numberOfQuestions={interviewquestions.length} />

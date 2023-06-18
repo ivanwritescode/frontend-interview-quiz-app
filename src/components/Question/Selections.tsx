@@ -23,7 +23,6 @@ const Selections = ({ options, correctAnswer, selectedAnswer, onAnswerSelected }
         return optionValue === selectedAnswer;
     };
 
-
     const getIsCorrect = (optionValue: string) => {
         return correctAnswer === optionValue;
     };
