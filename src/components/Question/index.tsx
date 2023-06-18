@@ -5,12 +5,22 @@ import Selections from "./Selections";
 interface IQuestionProps {
   question: IQuestion
   selectedAnswer: string;
+  currentPosition: number;
+  maxCount: number;
   onNextClicked: () => void;
   onPrevClicked: () => void;
   onAnswerSelected: (answerValue: string) => void;
 }
 
-const Question = ({ question, selectedAnswer, onNextClicked, onPrevClicked, onAnswerSelected }: IQuestionProps) => {
+const Question = ({
+  question,
+  selectedAnswer,
+  currentPosition,
+  maxCount,
+  onNextClicked,
+  onPrevClicked,
+  onAnswerSelected,
+}: IQuestionProps) => {
   return (
     <section className="question-section">
       <QuestionDisplay number={question.id + 1} content={question.question} />
@@ -19,7 +29,11 @@ const Question = ({ question, selectedAnswer, onNextClicked, onPrevClicked, onAn
         correctAnswer={question.correctAnswer}
         selectedAnswer={selectedAnswer}
         onAnswerSelected={onAnswerSelected} />
-      <Actions onNext={onNextClicked} onPrev={onPrevClicked} />
+      <Actions
+        currentPosition={currentPosition}
+        maxCount={maxCount}
+        onNext={onNextClicked}
+        onPrev={onPrevClicked} />
     </section>
   )
 }

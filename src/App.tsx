@@ -27,14 +27,10 @@ function App() {
   };
   
   const onNextClicked = () => {
-    if (questionId + 1 > interviewquestions.length - 1)
-      return;
     setQuestionId((questionId: number) => questionId + 1)
   };
 
   const onPrevClicked = () => {
-    if (questionId - 1 < 0)
-      return;
     setQuestionId((questionId: number) => questionId - 1)
   };
 
@@ -63,6 +59,8 @@ function App() {
         <Question
           question={interviewquestions[questionId]}
           selectedAnswer={selectedAnswer}
+          currentPosition={questionId}
+          maxCount={interviewquestions.length}
           onNextClicked={onNextClicked}
           onPrevClicked={onPrevClicked}
           onAnswerSelected={onAnswerSelected} />

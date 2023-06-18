@@ -122,6 +122,12 @@ body {
   cursor: pointer;
 }
 
+.btn:disabled:hover,
+.btn:disabled:active {
+  background: inherit;
+  color: #b7b7b7;
+}
+
 .btn:hover,
 .btn:active { 
   background: #aabdff;
