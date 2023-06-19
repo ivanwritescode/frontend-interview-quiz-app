@@ -23,6 +23,7 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  color: #5a5c5c;
 }
 
 .grid-container {
@@ -43,6 +44,7 @@ body {
   font-size: 1rem; 
   text-align: center;
   margin-bottom: 1rem; 
+  color: #606161;
 }
 
 .question-section {
@@ -122,6 +124,11 @@ body {
   margin-right: 1.5rem;
   font-weight: 700;
   cursor: pointer;
+  color: #799efe;
+}
+
+.btn:disabled {
+  color: #b7b7b7;
 }
 
 .btn:disabled:hover,
