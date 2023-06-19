@@ -5,7 +5,6 @@ interface iQuestionsNavigationProps {
     onNavClick: (id: number) => void;
 }
 
-// TODO: add a skip functionality
 const QuestionsNavigation = ({
     currentQuestionNumber,
     numberOfQuestions,
