@@ -36,6 +36,7 @@ const Selections = ({ options, correctAnswer, selectedAnswer, onAnswerSelected }
                     className={getAnswerItemClass(option)}
                     value={option}
                     isSelected={getIsSelected(option)}
+                    isDisabled={selectedAnswer.userAnswer !== ""}
                     onChange={onAnswerSelected} />
             )}
         </div>
