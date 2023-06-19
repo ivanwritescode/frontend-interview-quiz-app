@@ -11,6 +11,7 @@ function App() {
   const [selectedAnswer, setSelectedAnswer] = useState('');
   const [isExplanationShown, setIsExplanationShown] = useState(false);
   const [score, setScore] = useState(0);
+  const [userAnswers, setUserAnswers] = useState<IUserAnswer[]>([]);
 
   // for debugging
   const log = () => {
@@ -45,6 +46,16 @@ function App() {
 
   const onAnswerSelected = (value: string) => {
     setSelectedAnswer(value);
+
+    setUserAnswers((prevAnswers: IUserAnswer[]) => {
+      return [
+        ...prevAnswers,
+        {
+          id: questionId,
+          userAnswer: value
+        }
+      ]
+    })
   };
 
   useEffect(() => {

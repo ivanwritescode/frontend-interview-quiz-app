@@ -6,3 +6,8 @@ interface IQuestion {
     correctAnswer: string;
     explanation: string;
 }
+
+interface IUserAnswer {
+    id: number;
+    userAnswer: string;
+}
