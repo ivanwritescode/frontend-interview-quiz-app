@@ -12,6 +12,7 @@ body {
 .container {
   width: 95%;
   max-width: 64rem;
+  max-height: 95%;
   background: #fff;
   padding: 0.8rem;
   border-radius: 1rem; 
