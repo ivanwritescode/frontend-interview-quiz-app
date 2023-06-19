@@ -40,6 +40,10 @@ function App() {
     updateAnswers(value);
   };
 
+  const onNavClick = (questionId: number) => {
+    setQuestionId(questionId);
+  };
+
   const updateAnswers = (value: string) => {
     const existingAnswer = userAnswers.find(answer => answer.id === questionId);
     if (existingAnswer) {
@@ -91,7 +95,9 @@ function App() {
           isShown={userAnswers.some(userAnswer => userAnswer.id === questionId)} />
         <QuestionsNavigation
           currentQuestionNumber={questionId + 1}
-          numberOfQuestions={interviewquestions.length} />
+          numberOfQuestions={interviewquestions.length}
+          onNavClick={onNavClick}
+          />
       </div>
     </main>
   )

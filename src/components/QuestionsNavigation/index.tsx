@@ -1,24 +1,25 @@
 interface iQuestionsNavigationProps {
     currentQuestionNumber: number;
     numberOfQuestions: number;
+    onNavClick: (id: number) => void;
 }
 
 // TODO: add a skip functionality
-const generateNavControlItems = (currentPosition: number, maxValue: number) => {
-    const jsxElements = [];
-    for (let i = 1; i <= maxValue; i++) {
-        let className = "";
-        if (i < currentPosition)
-            className = "done"
-        else if (i === currentPosition)
-            className = "active"
+const QuestionsNavigation = ({ currentQuestionNumber, numberOfQuestions, onNavClick }: iQuestionsNavigationProps) => {
+    const generateNavControlItems = (currentPosition: number, maxValue: number) => {
+        const jsxElements = [];
+        for (let i = 1; i <= maxValue; i++) {
+            let className = "";
+            if (i < currentPosition)
+                className = "done"
+            else if (i === currentPosition)
+                className = "active"
 
-        jsxElements.push(<li key={`navcontrolitem-${i}`}><a className={className} href="#">{i}</a></li>);
-    }
-    return jsxElements;
-};
+            jsxElements.push(<li key={`navcontrolitem-${i}`}><button onClick={() => { onNavClick(i - 1) }} className={className}>{i}</button></li>);
+        }
+        return jsxElements;
+    };
 
-const QuestionsNavigation = ({ currentQuestionNumber, numberOfQuestions }: iQuestionsNavigationProps) => {
     return (
         <section className="questions-nav-section">
             <p className="question-context">

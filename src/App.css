@@ -182,7 +182,7 @@ body {
   margin: 0;  
 } 
 
-.questions-nav-section .question-nums-list a {
+.questions-nav-section .question-nums-list button {
   text-decoration: none;
   color: inherit;
   padding: 0.5rem; 
@@ -196,15 +196,17 @@ body {
   justify-content: center;
   font-weight: 700;
   color: #fff;
+  border: 0;
+  cursor: pointer;
 } 
-.questions-nav-section .question-nums-list a:hover {
+.questions-nav-section .question-nums-list button:hover {
   filter: brightness(0.9) 
 }
-.questions-nav-section .question-nums-list a.done { 
+.questions-nav-section .question-nums-list button.done { 
   background: #aabdff;
 }
 
-.questions-nav-section .question-nums-list a.active { 
+.questions-nav-section .question-nums-list button.active { 
   background: #ffaaaf;
 }
 
