@@ -22,6 +22,12 @@ function App() {
     });
   };
 
+  // might be temporary workaround to make states update immediately
+  const cleanup = () => {
+    setIsExplanationShown(false);
+    setSelectedAnswer('');
+  };
+
   const getIsAnswerCorrect = () => {
     const currentQuestion = interviewquestions[questionId];
     return currentQuestion.correctAnswer === selectedAnswer;
@@ -29,14 +35,12 @@ function App() {
   
   const onNextClicked = () => {
     setQuestionId((questionId: number) => questionId + 1);
-    setIsExplanationShown(false);
-    setSelectedAnswer('');
+    cleanup();
   };
 
   const onPrevClicked = () => {
     setQuestionId((questionId: number) => questionId - 1);
-    setIsExplanationShown(false);
-    setSelectedAnswer('');
+    cleanup();
   };
 
   const onAnswerSelected = (value: string) => {
@@ -55,8 +59,7 @@ function App() {
   }, [score]);
   
   useEffect(() => {
-    setSelectedAnswer(''); // clear selected everytime the question changes
-    setIsExplanationShown(false);
+    cleanup();
   }, [questionId])
 
   return (
