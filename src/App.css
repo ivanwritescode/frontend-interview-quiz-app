@@ -271,7 +271,6 @@ body {
 
 @media(max-width: 51rem) {
   .container {   
-    grid-template-rows: 0.1fr 1fr 1fr;
     border-radius: 0;
     position: static;
     height: 100vh;
@@ -281,13 +280,17 @@ body {
     transform: translate(0%, 0%);  
    }
 
+  .grid-container {
+    grid-template-rows: 0.1fr 1fr 1fr;
+  }
+
   .answer-item {
     text-align: center;
   }
 } 
 
 @media (max-width: 38rem) {
-  .container {
+  .grid-container {
     position: static;
     width: 100%;
     padding: 0.8rem;
