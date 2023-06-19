@@ -15,7 +15,7 @@ function App() {
   const log = () => {
     const currentQuestion = interviewquestions[questionId];
     console.table({
-      "Selected Option": userAnswers[questionId].userAnswer,
+      "Selected Option": userAnswers[questionId]?.userAnswer,
       "Correct Answer": currentQuestion.correctAnswer,
       "Is Correct": getIsAnswerCorrect()
     });
