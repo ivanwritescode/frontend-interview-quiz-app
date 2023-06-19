@@ -5,11 +5,13 @@ import Question from './components/Question'
 import QuestionsNavigation from './components/QuestionsNavigation'
 import QuizTitle from './components/QuizTitle'
 import { interviewquestions } from './util/questions'
+import Result from './components/Question/Result'
 
 function App() {
   const [questionId, setQuestionId] = useState(0);
   const [score, setScore] = useState(0);
   const [userAnswers, setUserAnswers] = useState<IUserAnswer[]>([]);
+  const [isDone, setIsDone] = useState(false);
 
   // for debugging
   const log = () => {
@@ -36,12 +38,23 @@ function App() {
     setQuestionId((questionId: number) => questionId - 1);
   };
 
+  const onFinishClicked = () => {
+    setIsDone(true);
+  };
+
   const onAnswerSelected = (value: string) => {
     updateAnswers(value);
   };
 
   const onNavClick = (questionId: number) => {
     setQuestionId(questionId);
+  };
+
+  const onTryAgainClicked = () => {
+    setIsDone(false);
+    setQuestionId(0);
+    setUserAnswers([]);
+    setScore(0);
   };
 
   const updateAnswers = (value: string) => {
@@ -81,23 +94,31 @@ function App() {
   return (
     <main>
       <div className="container">
-        <QuizTitle title='React Interview Questions' />
-        <Question
-          question={interviewquestions[questionId]}
-          selectedAnswer={userAnswers.filter((answer) => answer.id === questionId)[0] || { id: 0, userAnswer: "" }}
-          currentPosition={questionId}
-          maxCount={interviewquestions.length}
-          onNextClicked={onNextClicked}
-          onPrevClicked={onPrevClicked}
-          onAnswerSelected={onAnswerSelected} />
-        <Explanation
-          explanationText={interviewquestions[questionId].explanation}
-          isShown={userAnswers.some(userAnswer => userAnswer.id === questionId)} />
-        <QuestionsNavigation
-          currentQuestionNumber={questionId + 1}
-          numberOfQuestions={interviewquestions.length}
-          userAnswers={userAnswers}
-          onNavClick={onNavClick} />
+        {!isDone
+          ? <div className="grid-container">
+            <QuizTitle title='React Interview Questions' />
+            <Question
+              question={interviewquestions[questionId]}
+              selectedAnswer={userAnswers.filter((answer) => answer.id === questionId)[0] || { id: 0, userAnswer: "" }}
+              currentPosition={questionId}
+              maxCount={interviewquestions.length}
+              onNextClicked={onNextClicked}
+              onPrevClicked={onPrevClicked}
+              onFinishClicked={onFinishClicked}
+              onAnswerSelected={onAnswerSelected} />
+            <Explanation
+              explanationText={interviewquestions[questionId].explanation}
+              isShown={userAnswers.some(userAnswer => userAnswer.id === questionId)} />
+            <QuestionsNavigation
+              currentQuestionNumber={questionId + 1}
+              numberOfQuestions={interviewquestions.length}
+              userAnswers={userAnswers}
+              onNavClick={onNavClick} />
+          </div>
+          : <Result
+            score={score}
+            numberOfQuestions={interviewquestions.length}
+            onTryAgainClicked={onTryAgainClicked} />}
       </div>
     </main>
   )

@@ -9,6 +9,7 @@ interface IQuestionProps {
   maxCount: number;
   onNextClicked: () => void;
   onPrevClicked: () => void;
+  onFinishClicked: () => void;
   onAnswerSelected: (answerValue: string) => void;
 }
 
@@ -19,6 +20,7 @@ const Question = ({
   maxCount,
   onNextClicked,
   onPrevClicked,
+  onFinishClicked,
   onAnswerSelected,
 }: IQuestionProps) => {
   return (
@@ -33,7 +35,8 @@ const Question = ({
         currentPosition={currentPosition}
         maxCount={maxCount}
         onNext={onNextClicked}
-        onPrev={onPrevClicked} />
+        onPrev={onPrevClicked}
+        onFinish={onFinishClicked} />
     </section>
   )
 }

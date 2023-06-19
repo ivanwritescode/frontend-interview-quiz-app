@@ -3,6 +3,7 @@ interface IActionsProp {
     maxCount: number;
     onNext: () => void;
     onPrev: () => void;
+    onFinish: () => void;
 }
 
 const Actions = ({
@@ -10,11 +11,12 @@ const Actions = ({
     maxCount,
     onNext,
     onPrev,
+    onFinish,
 }: IActionsProp) => {
-    const getIsNextDisabled = () =>
+    const getIsEndOfCollection = () =>
         currentPosition >= maxCount - 1;
 
-    const getIsPrevDisabled = () =>
+    const getIsStartOfCollection = () =>
         currentPosition <= 0;
 
     const handleNextClicked = () => {
@@ -31,8 +33,10 @@ const Actions = ({
 
     return (
         <div className="action">
-            <button className="btn" onClick={handlePrevClicked} disabled={getIsPrevDisabled()}>Prev</button>
-            <button className="btn" onClick={handleNextClicked} disabled={getIsNextDisabled()}>Next</button>
+            <button className="btn" onClick={handlePrevClicked} disabled={getIsStartOfCollection()}>Prev</button>
+            {getIsEndOfCollection()
+                ? <button className="btn" onClick={onFinish}>Finish!</button>
+                : <button className="btn" onClick={handleNextClicked}>Next</button>}
         </div>
     )
 }
