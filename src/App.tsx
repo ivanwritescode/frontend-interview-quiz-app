@@ -25,7 +25,7 @@ function App() {
     if (!userAnswers[questionId]) return;
     const currentCorrectAnswer = interviewquestions[questionId].correctAnswer;
     const currentUserAnswer = userAnswers[questionId].userAnswer;
-    return currentCorrectAnswer === currentUserAnswer ;
+    return currentCorrectAnswer === currentUserAnswer;
   };
 
   const onNextClicked = () => {
@@ -84,7 +84,7 @@ function App() {
         <QuizTitle title='React Interview Questions' />
         <Question
           question={interviewquestions[questionId]}
-          selectedAnswer={userAnswers[questionId] || { id: 0, userAnswer: "" }}
+          selectedAnswer={userAnswers.filter((answer) => answer.id === questionId)[0] || { id: 0, userAnswer: "" }}
           currentPosition={questionId}
           maxCount={interviewquestions.length}
           onNextClicked={onNextClicked}
@@ -96,8 +96,8 @@ function App() {
         <QuestionsNavigation
           currentQuestionNumber={questionId + 1}
           numberOfQuestions={interviewquestions.length}
-          onNavClick={onNavClick}
-          />
+          userAnswers={userAnswers}
+          onNavClick={onNavClick} />
       </div>
     </main>
   )

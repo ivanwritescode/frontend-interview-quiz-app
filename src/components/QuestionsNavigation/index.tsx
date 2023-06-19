@@ -1,16 +1,25 @@
 interface iQuestionsNavigationProps {
     currentQuestionNumber: number;
     numberOfQuestions: number;
+    userAnswers: IUserAnswer[];
     onNavClick: (id: number) => void;
 }
 
 // TODO: add a skip functionality
-const QuestionsNavigation = ({ currentQuestionNumber, numberOfQuestions, onNavClick }: iQuestionsNavigationProps) => {
+const QuestionsNavigation = ({
+    currentQuestionNumber,
+    numberOfQuestions,
+    userAnswers,
+    onNavClick
+}: iQuestionsNavigationProps) => {
+    const getIsAnswered = (id: number) =>
+        userAnswers.some(answer => answer.id === id)
+
     const generateNavControlItems = (currentPosition: number, maxValue: number) => {
         const jsxElements = [];
         for (let i = 1; i <= maxValue; i++) {
             let className = "";
-            if (i < currentPosition)
+            if (getIsAnswered(i - 1))
                 className = "done"
             else if (i === currentPosition)
                 className = "active"
