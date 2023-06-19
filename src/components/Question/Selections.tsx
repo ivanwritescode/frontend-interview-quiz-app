@@ -1,7 +1,7 @@
 interface IOptionProp {
     options: string[];
     correctAnswer: string;
-    selectedAnswer: string;
+    selectedAnswer: IUserAnswer;
     onAnswerSelected: (answer: string) => void;
 }
 
@@ -20,7 +20,7 @@ const Selections = ({ options, correctAnswer, selectedAnswer, onAnswerSelected }
     };
 
     const getIsSelected = (optionValue: string) => {
-        return optionValue === selectedAnswer;
+        return optionValue === selectedAnswer.userAnswer;
     };
 
     const getIsCorrect = (optionValue: string) => {

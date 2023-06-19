@@ -3,8 +3,8 @@ import QuestionDisplay from "./QuestionDisplay"
 import Selections from "./Selections";
 
 interface IQuestionProps {
-  question: IQuestion
-  selectedAnswer: string;
+  question: IQuestion;
+  selectedAnswer: IUserAnswer;
   currentPosition: number;
   maxCount: number;
   onNextClicked: () => void;

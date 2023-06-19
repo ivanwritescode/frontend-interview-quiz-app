@@ -8,8 +8,6 @@ import { interviewquestions } from './util/questions'
 
 function App() {
   const [questionId, setQuestionId] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState('');
-  const [isExplanationShown, setIsExplanationShown] = useState(false);
   const [score, setScore] = useState(0);
   const [userAnswers, setUserAnswers] = useState<IUserAnswer[]>([]);
 
@@ -17,61 +15,64 @@ function App() {
   const log = () => {
     const currentQuestion = interviewquestions[questionId];
     console.table({
-      "Selected Option": selectedAnswer,
+      "Selected Option": userAnswers[questionId],
       "Correct Answer": currentQuestion.correctAnswer,
-      "Is Correct":  getIsAnswerCorrect()
+      "Is Correct": getIsAnswerCorrect()
     });
   };
 
-  // might be temporary workaround to make states update immediately
-  const cleanup = () => {
-    setIsExplanationShown(false);
-    setSelectedAnswer('');
+  const getIsAnswerCorrect = () => {
+    if (!userAnswers[questionId]) return;
+    const currentCorrectAnswer = interviewquestions[questionId].correctAnswer;
+    const currentUserAnswer = userAnswers[questionId].userAnswer;
+    return currentCorrectAnswer === currentUserAnswer ;
   };
 
-  const getIsAnswerCorrect = () => {
-    const currentQuestion = interviewquestions[questionId];
-    return currentQuestion.correctAnswer === selectedAnswer;
-  };
-  
   const onNextClicked = () => {
     setQuestionId((questionId: number) => questionId + 1);
-    cleanup();
   };
 
   const onPrevClicked = () => {
     setQuestionId((questionId: number) => questionId - 1);
-    cleanup();
   };
 
   const onAnswerSelected = (value: string) => {
-    setSelectedAnswer(value);
+    updateAnswers(value);
+  };
 
-    setUserAnswers((prevAnswers: IUserAnswer[]) => {
-      return [
+  const updateAnswers = (value: string) => {
+    const existingAnswer = userAnswers.find(answer => answer.id === questionId);
+    if (existingAnswer) {
+      const updatedAnswer = userAnswers.map(answer => {
+        if (answer.id === questionId) {
+          return {
+            ...answer,
+            userAnswer: value,
+          }
+        }
+        return answer;
+      });
+      setUserAnswers(updatedAnswer)
+    } else {
+      setUserAnswers((prevAnswers) => [
         ...prevAnswers,
         {
           id: questionId,
           userAnswer: value
-        }
-      ]
-    })
+        },
+      ]);
+    }
   };
 
   useEffect(() => {
-    if (getIsAnswerCorrect())
+    if (userAnswers[questionId] && getIsAnswerCorrect())
       setScore((prevScore) => prevScore + 1);
-    setIsExplanationShown(true);
     log(); // log answer information everytime selected answer is updated
-  }, [selectedAnswer]);
+  }, [userAnswers]);
 
   useEffect(() => {
     console.log("SCORE: ", score); // log score everytime it changes
   }, [score]);
-  
-  useEffect(() => {
-    cleanup();
-  }, [questionId])
 
   return (
     <main>
@@ -79,7 +80,7 @@ function App() {
         <QuizTitle title='React Interview Questions' />
         <Question
           question={interviewquestions[questionId]}
-          selectedAnswer={selectedAnswer}
+          selectedAnswer={userAnswers[questionId] || { id: 0, userAnswer: "" }}
           currentPosition={questionId}
           maxCount={interviewquestions.length}
           onNextClicked={onNextClicked}
@@ -87,7 +88,7 @@ function App() {
           onAnswerSelected={onAnswerSelected} />
         <Explanation
           explanationText={interviewquestions[questionId].explanation}
-          isShown={isExplanationShown} />
+          isShown={userAnswers.some(userAnswer => userAnswer.id === questionId)} />
         <QuestionsNavigation
           currentQuestionNumber={questionId + 1}
           numberOfQuestions={interviewquestions.length} />
