@@ -284,6 +284,19 @@ body {
     grid-template-rows: 0.1fr 1fr 1fr;
   }
 
+  .question {
+    text-align: center;
+  }
+  
+  .question .question-text,
+  .question .question-num {
+    margin-bottom: 0;
+  }
+
+  .question .question-text {
+    font-size: 1.2rem;
+  }
+
   .answer-item {
     text-align: center;
   }
