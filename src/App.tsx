@@ -23,10 +23,25 @@ function App() {
     });
   };
 
+  const getIsQuestionAnswered = () => {
+    return state
+      .userAnswers
+      .some(userAnswer =>
+        userAnswer.id === state.questionId)
+  };
+
+  const getAnswerToCurrentQuestion = () => {
+    return state
+      .userAnswers
+      .filter(answer =>
+        answer.id === state.questionId)[0]
+  };
+
   const getIsAnswerCorrect = () => {
-    if (!state.userAnswers[state.questionId]) return;
+    if (!getIsQuestionAnswered()) return;
+
     const currentCorrectAnswer = interviewquestions[state.questionId].correctAnswer;
-    const currentUserAnswer = state.userAnswers[state.questionId].userAnswer;
+    const currentUserAnswer = getAnswerToCurrentQuestion().userAnswer;
     return currentCorrectAnswer === currentUserAnswer;
   };
 
@@ -55,7 +70,7 @@ function App() {
   };
 
   useEffect(() => {
-    if (state.userAnswers[state.questionId] && getIsAnswerCorrect())
+    if (getIsQuestionAnswered() && getIsAnswerCorrect())
       dispatch({ type: "update_score", payload: state.score + 1 })
     log(); // log answer information everytime selected answer is updated
   }, [state.userAnswers]);
@@ -72,7 +87,7 @@ function App() {
             <QuizTitle title='React Interview Questions' />
             <Question
               question={interviewquestions[state.questionId]}
-              selectedAnswer={state.userAnswers.filter((answer) => answer.id === state.questionId)[0] || { id: 0, userAnswer: "" }}
+              selectedAnswer={getAnswerToCurrentQuestion() || { id: 0, userAnswer: "" }}
               currentPosition={state.questionId}
               maxCount={interviewquestions.length}
               onNextClicked={onNextClicked}
@@ -81,7 +96,7 @@ function App() {
               onAnswerSelected={onAnswerSelected} />
             <Explanation
               explanationText={interviewquestions[state.questionId].explanation}
-              isShown={state.userAnswers.some(userAnswer => userAnswer.id === state.questionId)} />
+              isShown={getIsQuestionAnswered()} />
             <QuestionsNavigation
               currentQuestionNumber={state.questionId + 1}
               numberOfQuestions={interviewquestions.length}
