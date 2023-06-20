@@ -147,10 +147,10 @@ export const interviewquestions = [
         "type": "multipleChoice",
         "question": "What is the purpose of the useRef hook in React?",
         "options": [
+            "To handle side effects and perform cleanup in functional components",
             "To memoize expensive calculations",
             "To create reusable custom hooks",
             "To access and manipulate DOM elements",
-            "To handle side effects and perform cleanup in functional components"
         ],
         "correctAnswer": "To access and manipulate DOM elements",
         "explanation": "The useRef hook in React is used to access and manipulate DOM elements. It allows you to create a mutable reference that persists across component renders. With useRef, you can access properties and methods of DOM elements, such as getting their values, adding event listeners, or focusing an input element. Unlike useState, changes to the ref value don't trigger component re-renders, making it useful for scenarios where you need to store and update references to DOM elements without affecting the component's rendering."
@@ -160,10 +160,10 @@ export const interviewquestions = [
         "type": "multipleChoice",
         "question": "What is the purpose of the useHistory hook in React Router?",
         "options": [
+            "To manage navigation history and URL in React applications",
             "To memoize expensive calculations",
             "To create reusable custom hooks",
             "To handle form validation in React applications",
-            "To manage navigation history and URL in React applications"
         ],
         "correctAnswer": "To manage navigation history and URL in React applications",
         "explanation": "The useHistory hook in React Router is used to manage navigation history and URL in React applications. It provides access to the history object, which allows you to programmatically navigate, push or replace URLs, and go back or forward in the navigation history. By using useHistory, you can leverage React Router's navigation capabilities within functional components. It enables dynamic routing and seamless navigation between different views or pages in a React application."
@@ -188,8 +188,8 @@ export const interviewquestions = [
         "options": [
             "To memoize expensive calculations",
             "To create reusable custom hooks",
+            "To access URL parameters in React Router",
             "To handle form validation in React applications",
-            "To access URL parameters in React Router"
         ],
         "correctAnswer": "To access URL parameters in React Router",
         "explanation": "The useParams hook in React Router is used to access URL parameters in React Router. It allows you to extract dynamic segments from the current URL and access them as named parameters. For example, if you have a route like '/users/:id', you can use useParams to retrieve the value of 'id' from the URL. This can be useful when building dynamic routes and extracting information from the URL to customize the behavior or content of your components."
@@ -201,9 +201,9 @@ export const interviewquestions = [
         "question": "What is the purpose of the useLayoutEffect hook in React?",
         "options": [
             "To memoize expensive calculations",
+            "To perform synchronous side effects after the DOM has been updated",
             "To create reusable custom hooks",
             "To handle form validation in React applications",
-            "To perform synchronous side effects after the DOM has been updated"
         ],
         "correctAnswer": "To perform synchronous side effects after the DOM has been updated",
         "explanation": "The useLayoutEffect hook in React is similar to the useEffect hook, but it fires synchronously after all DOM mutations are applied. It allows you to perform immediate side effects that rely on the updated DOM, such as measuring DOM nodes or updating layout-related properties. This hook is particularly useful for scenarios where you need to synchronously interact with the DOM after a component has rendered or updated. However, it's important to note that excessive use of useLayoutEffect can negatively impact performance, so it should be used sparingly."
@@ -214,9 +214,9 @@ export const interviewquestions = [
         "question": "What is the purpose of the withRouter higher-order component in React Router?",
         "options": [
             "To memoize expensive calculations",
+            "To provide access to the history object and match params outside of Route components",
             "To create reusable custom hooks",
             "To handle form validation in React applications",
-            "To provide access to the history object and match params outside of Route components"
         ],
         "correctAnswer": "To provide access to the history object and match params outside of Route components",
         "explanation": "The withRouter higher-order component in React Router is used to provide access to the history object and match params outside of Route components. By wrapping a component with withRouter, you can access the history, location, and match objects, even if the component is not directly rendered by a Route component. This can be useful when you need to access routing-related information and perform navigation actions within a component that is not part of the route hierarchy, such as in nested components or higher-level containers."
@@ -228,8 +228,8 @@ export const interviewquestions = [
         "options": [
             "To memoize expensive calculations",
             "To create reusable custom hooks",
+            "To provide routing capabilities and components for React applications",
             "To handle form validation in React applications",
-            "To provide routing capabilities and components for React applications"
         ],
         "correctAnswer": "To provide routing capabilities and components for React applications",
         "explanation": "The react-router-dom package is a popular library in React that provides routing capabilities and components for building single-page applications. It is built on top of React Router and offers a higher-level API for declaratively defining routes, managing navigation, and rendering different components based on the current URL. The package includes components like Route, Link, Switch, and BrowserRouter that enable developers to implement client-side routing and create navigation flows within their React applications."
