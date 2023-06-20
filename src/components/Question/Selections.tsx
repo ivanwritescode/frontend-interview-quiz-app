@@ -1,10 +1,11 @@
 interface IOptionProp {
     options: string[];
     correctAnswer: string;
-    selectedAnswer: IUserAnswer;
+    selectedAnswer: IUserAnswer | null;
     onAnswerSelected: (answer: string) => void;
 }
 
+import { IUserAnswer } from "../../util/interfaces";
 import Option from "./Option";
 
 const Selections = ({ options, correctAnswer, selectedAnswer, onAnswerSelected }: IOptionProp) => {
@@ -20,7 +21,8 @@ const Selections = ({ options, correctAnswer, selectedAnswer, onAnswerSelected }
     };
 
     const getIsSelected = (optionValue: string) => {
-        return optionValue === selectedAnswer.userAnswer;
+        return selectedAnswer !== null
+            && optionValue === selectedAnswer?.value
     };
 
     const getIsCorrect = (optionValue: string) => {
@@ -36,7 +38,7 @@ const Selections = ({ options, correctAnswer, selectedAnswer, onAnswerSelected }
                     className={getAnswerItemClass(option)}
                     value={option}
                     isSelected={getIsSelected(option)}
-                    isDisabled={selectedAnswer.userAnswer !== ""}
+                    isDisabled={selectedAnswer !== null}
                     onChange={onAnswerSelected} />
             )}
         </div>

@@ -11,6 +11,7 @@ import Result from './components/Question/Result'
 import reducer from './util/reducer'
 import { interviewquestions } from './util/questions'
 import { initialState } from './util/constants'
+import { IUserAnswer } from './util/interfaces'
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -32,18 +33,19 @@ function App() {
         userAnswer.id === state.questionId)
   };
 
-  const getAnswerToCurrentQuestion = () => {
-    return state
-      .userAnswers
-      .filter(answer =>
-        answer.id === state.questionId)[0]
+  const getAnswerToCurrentQuestion = (): IUserAnswer | null => {
+    const filtered = state.userAnswers.filter(answer => answer.id === state.questionId)
+    if (filtered.length > 0)
+      return filtered[0];
+    else
+      return null
   };
 
   const getIsAnswerCorrect = () => {
     if (!getIsQuestionAnswered()) return;
 
     const currentCorrectAnswer = interviewquestions[state.questionId].correctAnswer;
-    const currentUserAnswer = getAnswerToCurrentQuestion().value;
+    const currentUserAnswer = getAnswerToCurrentQuestion()?.value;
     return currentCorrectAnswer === currentUserAnswer;
   };
 
@@ -89,7 +91,7 @@ function App() {
             <QuizTitle title='React Interview Questions' />
             <Question
               question={interviewquestions[state.questionId]}
-              selectedAnswer={getAnswerToCurrentQuestion() || { id: 0, userAnswer: "" }}
+              selectedAnswer={getAnswerToCurrentQuestion()}
               currentPosition={state.questionId}
               maxCount={interviewquestions.length}
               onNextClicked={onNextClicked}

@@ -1,3 +1,5 @@
+import { IUserAnswer } from "../../util/interfaces";
+
 interface iQuestionsNavigationProps {
     currentQuestionNumber: number;
     numberOfQuestions: number;

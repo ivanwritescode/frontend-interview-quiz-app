@@ -5,7 +5,7 @@ import Selections from "./Selections";
 
 interface IQuestionProps {
   question: IQuestion;
-  selectedAnswer: IUserAnswer;
+  selectedAnswer: IUserAnswer | null;
   currentPosition: number;
   maxCount: number;
   onNextClicked: () => void;
