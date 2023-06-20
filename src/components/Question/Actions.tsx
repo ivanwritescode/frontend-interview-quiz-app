@@ -1,4 +1,5 @@
 interface IActionsProp {
+    areAllQuestionsAnswered: boolean;
     currentPosition: number;
     maxCount: number;
     onNext: () => void;
@@ -7,6 +8,7 @@ interface IActionsProp {
 }
 
 const Actions = ({
+    areAllQuestionsAnswered,
     currentPosition,
     maxCount,
     onNext,
@@ -34,8 +36,8 @@ const Actions = ({
     return (
         <div className="action">
             <button className="btn" onClick={handlePrevClicked} disabled={getIsStartOfCollection()}>Prev</button>
-            {getIsEndOfCollection()
-                ? <button className="btn" onClick={onFinish}>Finish!</button>
+            {getIsEndOfCollection() || areAllQuestionsAnswered
+                ? <button className="btn" onClick={onFinish} disabled={!areAllQuestionsAnswered}>Finish!</button>
                 : <button className="btn" onClick={handleNextClicked}>Next</button>}
         </div>
     )

@@ -26,6 +26,9 @@ function App() {
     });
   };
 
+  const getAreAllQuestionsAnswered = () =>
+    interviewquestions.length === state.userAnswers.length;
+
   const getIsQuestionAnswered = () => {
     return state
       .userAnswers
@@ -93,6 +96,7 @@ function App() {
               question={interviewquestions[state.questionId]}
               selectedAnswer={getAnswerToCurrentQuestion()}
               currentPosition={state.questionId}
+              areAllQuestionsAnswered={getAreAllQuestionsAnswered()}
               maxCount={interviewquestions.length}
               onNextClicked={onNextClicked}
               onPrevClicked={onPrevClicked}

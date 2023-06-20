@@ -7,6 +7,7 @@ interface IQuestionProps {
   question: IQuestion;
   selectedAnswer: IUserAnswer | null;
   currentPosition: number;
+  areAllQuestionsAnswered: boolean;
   maxCount: number;
   onNextClicked: () => void;
   onPrevClicked: () => void;
@@ -18,6 +19,7 @@ const Question = ({
   question,
   selectedAnswer,
   currentPosition,
+  areAllQuestionsAnswered,
   maxCount,
   onNextClicked,
   onPrevClicked,
@@ -33,6 +35,7 @@ const Question = ({
         selectedAnswer={selectedAnswer}
         onAnswerSelected={onAnswerSelected} />
       <Actions
+        areAllQuestionsAnswered={areAllQuestionsAnswered}
         currentPosition={currentPosition}
         maxCount={maxCount}
         onNext={onNextClicked}
