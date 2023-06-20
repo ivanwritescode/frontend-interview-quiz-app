@@ -9,7 +9,7 @@ export interface IQuestion {
 
 export interface IUserAnswer {
     id: number;
-    userAnswer: string;
+    value: string;
 }
 
 export interface IState {

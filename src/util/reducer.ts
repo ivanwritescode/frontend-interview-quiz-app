@@ -33,7 +33,7 @@ export default function reducer(state: IState, action: Action): IState {
             ...state.userAnswers,
             {
               id: state.questionId,
-              userAnswer: action.payload
+              value: action.payload
             },
           ]
         }

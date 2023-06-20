@@ -17,7 +17,7 @@ function App() {
   const log = () => {
     const currentQuestion = interviewquestions[state.questionId];
     console.table({
-      "Selected Option": state.userAnswers[state.questionId]?.userAnswer,
+      "Selected Option": state.userAnswers[state.questionId]?.value,
       "Correct Answer": currentQuestion.correctAnswer,
       "Is Correct": getIsAnswerCorrect()
     });
@@ -41,7 +41,7 @@ function App() {
     if (!getIsQuestionAnswered()) return;
 
     const currentCorrectAnswer = interviewquestions[state.questionId].correctAnswer;
-    const currentUserAnswer = getAnswerToCurrentQuestion().userAnswer;
+    const currentUserAnswer = getAnswerToCurrentQuestion().value;
     return currentCorrectAnswer === currentUserAnswer;
   };
 
