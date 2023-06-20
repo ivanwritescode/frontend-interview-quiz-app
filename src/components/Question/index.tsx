@@ -1,3 +1,4 @@
+import { IQuestion, IUserAnswer } from "../../util/interfaces";
 import Actions from "./Actions";
 import QuestionDisplay from "./QuestionDisplay"
 import Selections from "./Selections";
