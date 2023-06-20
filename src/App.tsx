@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useReducer } from 'react'
 import './App.css'
 import Explanation from './components/Explanation'
 import Question from './components/Question'
@@ -7,116 +7,145 @@ import QuizTitle from './components/QuizTitle'
 import { interviewquestions } from './util/questions'
 import Result from './components/Question/Result'
 
+const initialState: IState = {
+  questionId: 0,
+  score: 0,
+  userAnswers: [],
+  isDone: false,
+}
+
+function reducer(state: IState, action: Action): IState {
+  let updatedState: IState = { ...state };
+
+  switch (action.type) {
+    case "update_current_question_id":
+      updatedState = { ...state, questionId: action.payload };
+      break;
+
+    case "update_score":
+      updatedState = { ...state, score: action.payload };
+      break;
+
+    case "update_user_answers":
+      const isExistingAnswer = state.userAnswers.find(answer => answer.id === state.questionId);
+      if (isExistingAnswer) {
+        let updatedAnswer = state.userAnswers.map((answer) => {
+          if (answer.id === state.questionId) {
+            return {
+              ...answer,
+              userAnswer: action.payload,
+            }
+          }
+          return answer;
+        });
+        updatedState = { ...state, userAnswers: updatedAnswer }
+      } else {
+        updatedState = {
+          ...state, userAnswers: [
+            ...state.userAnswers,
+            {
+              id: state.questionId,
+              userAnswer: action.payload
+            },
+          ]
+        }
+      }
+      break;
+
+    case "update_is_done":
+      updatedState = { ...state, isDone: action.payload }
+      break;
+
+    case "reset_state":
+      return initialState;
+
+    default:
+      throw new Error('Unknown action type');
+  }
+
+  return updatedState;
+}
+
 function App() {
-  const [questionId, setQuestionId] = useState(0);
-  const [score, setScore] = useState(0);
-  const [userAnswers, setUserAnswers] = useState<IUserAnswer[]>([]);
-  const [isDone, setIsDone] = useState(false);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   // for debugging
   const log = () => {
-    const currentQuestion = interviewquestions[questionId];
+    const currentQuestion = interviewquestions[state.questionId];
     console.table({
-      "Selected Option": userAnswers[questionId]?.userAnswer,
+      "Selected Option": state.userAnswers[state.questionId]?.userAnswer,
       "Correct Answer": currentQuestion.correctAnswer,
       "Is Correct": getIsAnswerCorrect()
     });
   };
 
   const getIsAnswerCorrect = () => {
-    if (!userAnswers[questionId]) return;
-    const currentCorrectAnswer = interviewquestions[questionId].correctAnswer;
-    const currentUserAnswer = userAnswers[questionId].userAnswer;
+    if (!state.userAnswers[state.questionId]) return;
+    const currentCorrectAnswer = interviewquestions[state.questionId].correctAnswer;
+    const currentUserAnswer = state.userAnswers[state.questionId].userAnswer;
     return currentCorrectAnswer === currentUserAnswer;
   };
 
   const onNextClicked = () => {
-    setQuestionId((questionId: number) => questionId + 1);
+    dispatch({ type: "update_current_question_id", payload: state.questionId + 1 })
   };
 
   const onPrevClicked = () => {
-    setQuestionId((questionId: number) => questionId - 1);
+    dispatch({ type: "update_current_question_id", payload: state.questionId - 1 })
   };
 
   const onFinishClicked = () => {
-    setIsDone(true);
+    dispatch({ type: "update_is_done", payload: true })
   };
 
   const onAnswerSelected = (value: string) => {
-    updateAnswers(value);
+    dispatch({ type: "update_user_answers", payload: value })
   };
 
   const onNavClick = (questionId: number) => {
-    setQuestionId(questionId);
+    dispatch({ type: "update_current_question_id", payload: questionId })
   };
 
   const onTryAgainClicked = () => {
-    setIsDone(false);
-    setQuestionId(0);
-    setUserAnswers([]);
-    setScore(0);
-  };
-
-  const updateAnswers = (value: string) => {
-    const existingAnswer = userAnswers.find(answer => answer.id === questionId);
-    if (existingAnswer) {
-      const updatedAnswer = userAnswers.map(answer => {
-        if (answer.id === questionId) {
-          return {
-            ...answer,
-            userAnswer: value,
-          }
-        }
-        return answer;
-      });
-      setUserAnswers(updatedAnswer)
-    } else {
-      setUserAnswers((prevAnswers) => [
-        ...prevAnswers,
-        {
-          id: questionId,
-          userAnswer: value
-        },
-      ]);
-    }
+    dispatch({ type: "reset_state" })
   };
 
   useEffect(() => {
-    if (userAnswers[questionId] && getIsAnswerCorrect())
-      setScore((prevScore) => prevScore + 1);
+    if (state.userAnswers[state.questionId] && getIsAnswerCorrect())
+      dispatch({ type: "update_score", payload: state.score + 1 })
     log(); // log answer information everytime selected answer is updated
-  }, [userAnswers]);
+  }, [state.userAnswers]);
 
   useEffect(() => {
-    console.log("SCORE: ", score); // log score everytime it changes
-  }, [score]);
+    console.log("SCORE: ", state.score); // log score everytime it changes
+  }, [state.score]);
 
   return (
     <main>
       <div className="container">
-        {!isDone
+        {!state.isDone
           ? <div className="grid-container">
             <QuizTitle title='React Interview Questions' />
             <Question
-              question={interviewquestions[questionId]}
-              selectedAnswer={userAnswers.filter((answer) => answer.id === questionId)[0] || { id: 0, userAnswer: "" }}
-              currentPosition={questionId}
+              question={interviewquestions[state.questionId]}
+              selectedAnswer={state.userAnswers.filter((answer) => answer.id === state.questionId)[0] || { id: 0, userAnswer: "" }}
+              currentPosition={state.questionId}
               maxCount={interviewquestions.length}
               onNextClicked={onNextClicked}
               onPrevClicked={onPrevClicked}
               onFinishClicked={onFinishClicked}
               onAnswerSelected={onAnswerSelected} />
             <Explanation
-              explanationText={interviewquestions[questionId].explanation}
-              isShown={userAnswers.some(userAnswer => userAnswer.id === questionId)} />
+              explanationText={interviewquestions[state.questionId].explanation}
+              isShown={state.userAnswers.some(userAnswer => userAnswer.id === state.questionId)} />
             <QuestionsNavigation
-              currentQuestionNumber={questionId + 1}
+              currentQuestionNumber={state.questionId + 1}
               numberOfQuestions={interviewquestions.length}
-              userAnswers={userAnswers}
+              userAnswers={state.userAnswers}
               onNavClick={onNavClick} />
           </div>
           : <Result
-            score={score}
+            score={state.score}
             numberOfQuestions={interviewquestions.length}
             onTryAgainClicked={onTryAgainClicked} />}
       </div>
